@@ -164,26 +164,36 @@ bool Play2::Update()
 
 void Play2::Draw(glm::vec2 offset)
 {
+	Can::DrawQuadParameters params = Can::DrawQuadParameters();
+	params.Size = { 0.9f, 0.9f };
 	int half = m_Dimension / 2;
 	for (int x = -half; x < half; x++)
 	{
 		for (int y = -half; y < half; y++)
 		{
+			params.Position = { x + offset.x, y + offset.y , 0.1f };
 			switch ((int)m_State[x + half][y + half])
 			{
 			case 1:
-				//Can::Renderer2D::DrawQuad({ x + offset.x, y + offset.y , 0.1f }, { 0.9f, 0.9f }, m_Game->m_RedColor);
+				params.TintColor = m_Game->m_RedColor;
+				Can::Renderer2D::DrawQuad(params);
 				break;
 			case -1:
-				//Can::Renderer2D::DrawQuad({ x + offset.x, y + offset.y , 0.1f }, { 0.9f, 0.9f }, m_Game->m_BlackishColor);
+				params.TintColor = m_Game->m_BlackishColor;
+				Can::Renderer2D::DrawQuad(params);
 				break;
 			default:
-				//Can::Renderer2D::DrawQuad({ x + offset.x, y + offset.y , 0.1f }, { 0.9f, 0.9f }, { 1.0f ,1.0f ,1.0f ,1.0f });
+				params.TintColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+				Can::Renderer2D::DrawQuad(params);
 				break;
 			}
 		}
 	}
-	//Can::Renderer2D::DrawQuad({ m_Snake.back().x - half + offset.x, m_Snake.back().y - half + offset.y , 0.2f }, { 1.0f, 1.0f }, { 0.0f,0.0f,0.0f,1.0f });
+
+	params.Position = { m_Snake.back().x - half + offset.x, m_Snake.back().y - half + offset.y , 0.2f };
+	params.Size = glm::vec2(1.0f);
+	params.TintColor = { 0.0f, 0.0f, 0.0f, 1.0f };
+	Can::Renderer2D::DrawQuad(params );
 }
 
 glm::vec2 Play2::GetNewApplePosition()

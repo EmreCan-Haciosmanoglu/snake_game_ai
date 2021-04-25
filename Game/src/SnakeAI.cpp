@@ -16,10 +16,10 @@ SnakeAI::SnakeAI()
 	float m_ZoomLevel = 10.0f;
 	m_CameraController.GetCamera().SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 
+	m_Params.Position = { -8.5f, +1.5f, -0.2f };
+	m_Params.Size = { 12.0f, 12.0f };
+	m_Params.TintColor = { 0.85f, 0.85f, 0.85f, 1.0f };
 }
-
-void SnakeAI::OnAttach() {}
-void SnakeAI::OnDetach() {}
 
 void SnakeAI::OnUpdate(Can::TimeStep ts)
 {
@@ -32,7 +32,7 @@ void SnakeAI::OnUpdate(Can::TimeStep ts)
 
 	Can::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-	//Can::Renderer2D::DrawQuad({ -8.5f, +1.5f, -0.2f }, { 12.0f, 12.0f }, { 0.85f, 0.85f, 0.85f, 1.0f });
+	Can::Renderer2D::DrawQuad(m_Params);
 	m_Game->DrawBestPlay();
 
 	Can::Renderer2D::EndScene();
@@ -42,8 +42,6 @@ void SnakeAI::OnEvent(Can::Event::Event & event)
 {
 	m_CameraController.OnEvent(event);
 }
-
-
 
 void SnakeAI::OnImGuiRender()
 {

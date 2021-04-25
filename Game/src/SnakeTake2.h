@@ -12,8 +12,8 @@ public:
 	SnakeAI2();
 	virtual ~SnakeAI2() = default;
 
-	virtual void OnAttach() override;
-	virtual void OnDetach() override;
+	virtual void OnAttach() {}
+	virtual void OnDetach() {}
 
 	virtual void OnUpdate(Can::TimeStep ts) override;
 	virtual void OnEvent(Can::Event::Event& event) override;
@@ -24,4 +24,6 @@ private:
 
 	int populationSize = 300;
 	Game2* m_Game;
+
+	Can::DrawQuadParameters m_Params = Can::DrawQuadParameters();
 };

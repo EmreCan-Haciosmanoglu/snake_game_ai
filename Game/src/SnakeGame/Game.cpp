@@ -1,4 +1,3 @@
-#include "..\..\..\..\..\Game\src\GameApp.h"
 #include "canpch.h"
 #include "Game.h"
 
@@ -39,7 +38,6 @@ void Game::DrawBestPlay()
 
 void Game::DrawThat(int index)
 {
-
 	m_Plays[index]->Draw(m_Offset2);
 }
 

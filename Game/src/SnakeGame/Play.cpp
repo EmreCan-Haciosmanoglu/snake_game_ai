@@ -116,20 +116,26 @@ bool Play::Update()
 
 void Play::Draw(glm::vec2 offset)
 {
+	Can::DrawQuadParameters params = Can::DrawQuadParameters();
+	params.Size = { 0.9f, 0.9f };
 	for (int y = -7; y < 5; y++)
 	{
 		for (int x = -5; x < 7; x++)
 		{
+			params.Position = { x + offset.x, y + offset.y , 0.1f };
 			switch ((int)m_State[y + 7][x + 5])
 			{
 			case 1:
-				//Can::Renderer2D::DrawQuad({ x + offset.x, y + offset.y , 0.1f }, { 0.9f, 0.9f }, m_Game->m_RedColor);
+				params.TintColor = m_Game->m_RedColor;
+				Can::Renderer2D::DrawQuad(params);
 				break;
 			case -1:
-				//Can::Renderer2D::DrawQuad({ x + offset.x, y + offset.y , 0.1f }, { 0.9f, 0.9f }, m_Game->m_BlackishColor);
+				params.TintColor = m_Game->m_BlackishColor;
+				Can::Renderer2D::DrawQuad(params);
 				break;
 			default:
-				//Can::Renderer2D::DrawQuad({ x + offset.x, y + offset.y , 0.1f }, { 0.9f, 0.9f }, { 1.0f ,1.0f ,1.0f ,1.0f });
+				params.TintColor = { 1.0f, 1.0f, 1.0f, 1.0f };
+				Can::Renderer2D::DrawQuad(params);
 				break;
 			}
 		}
